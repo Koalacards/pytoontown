@@ -1,9 +1,7 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "json",
-    "requests",
-    "typing",
+    "setuptools",
+    "requests>=2",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
