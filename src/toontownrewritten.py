@@ -1,5 +1,4 @@
 from typing import Dict, List, Optional
-from typing_extensions import Required
 import requests
 import json
 
