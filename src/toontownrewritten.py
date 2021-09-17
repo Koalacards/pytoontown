@@ -7,7 +7,7 @@ POPULATION_ENDPOINT="https://www.toontownrewritten.com/api/population"
 SILLYMETER_ENDPOINT="https://www.toontownrewritten.com/api/sillymeter"
 
 """
-API Wrapper for the Toontown Rewritten API, using their four endpoints:
+API Wrapper for the Toontown Rewritten API, using three endpoints:
 -Invasions
 -Population
 -Silly Meter Status
@@ -28,6 +28,9 @@ class ToontownRewrittenInvasion:
     def refresh(self) -> None:
         """
         Refreshes the API call to get the new data
+
+        DO NOT EXCESSIVELY CALL THIS- You do not want to rate limit
+        the API. The standard call time should be once per 5-15 minutes.
         """
         self.__init__()
 
@@ -68,6 +71,7 @@ class ToontownRewrittenInvasion:
                 ["District", "Cog Type", "Progress]
                 ...
             ]
+
         Returns:
             Dict or List: Dictionary of invasions data or Array with 
             specifications above if as_array is True
@@ -97,6 +101,9 @@ class ToontownRewrittenPopulation:
     def refresh(self) -> None:
         """
         Refreshes the API call to get the new data
+
+        DO NOT EXCESSIVELY CALL THIS- You do not want to rate limit
+        the API. The standard call time should be once per 5-15 minutes.
         """
         self.__init__()
 
@@ -141,6 +148,142 @@ class ToontownRewrittenPopulation:
         """
         return self.data.get("populationByDistrict", None)
 
+class ToontownRewrittenSillyMeter:
+    """
+    Class that gets the Toontown Rewritten Silly Meter information
+    """
+
+    def __init__(self) -> None:
+        self.data = _get_data(SILLYMETER_ENDPOINT)
+
+    def refresh(self) -> None:
+        """
+        Refreshes the API call to get the new data
+
+        DO NOT EXCESSIVELY CALL THIS- You do not want to rate limit
+        the API. The standard call time should be once per 5-15 minutes.
+        """
+        self.__init__()
+
+    def as_of(self) -> Optional(int, None):
+        """Returns the generated time of the API call
+
+        Returns:
+            int: timestamp of the time when API was called
+            or
+            None: if there is error and this field doesn't show up
+        """
+        return self.data.get("lastUpdated", None)
+
+    def error(self) -> Optional(str, None):
+        """Returns the error message as a string, or None if there is
+        no error message
+
+        Returns:
+            An error message as a string, or None
+        """
+        return self.data.get("error", None)
+
+    def state(self) -> Optional(str, None):
+        """
+        Returns the Silly Meter State ("Active", "Reward", or "Inactive")
+        if the data field exists.
+
+        Returns:
+            str: The state of the silly meter
+            or
+            None: if there is error and this field doesn't show up
+        """
+        return self.data.get("state", None)
+    
+    def hp(self) -> Optional(int, None):
+        """
+        Returns the current HP of the silly meter, ranging from
+        0-5,000,000.
+
+        Returns:
+            int: the HP of the silly meter
+            or
+            None: if there is error and this field doesn't show up
+        """
+        return self.data.get("hp", None)
+
+    def rewards(self) -> Optional(List, None):
+        """
+        Returns the Silly meter rewards as a list of three strings
+        that the players are eligible to join. These are rerolled when
+        the player exits the "Reward" state
+
+        Returns:
+            list: The list of the three rewards, as strings
+            or
+            None: if there is error and this field doesn't show up
+        """
+        return self.data.get("rewards", None)
+
+    def reward_descriptions(self) -> Optional(List, None):
+        """
+        Returns the Silly meter reward descriptions as a list of 
+        three strings describing the current teams that the players 
+        are eligible to join. These are updated depending on the 
+        current Silly Teams.
+
+        Returns:
+            list: The list of the three reward descriptions, as strings
+            or
+            None: if there is error and this field doesn't show up
+        """
+        return self.data.get("rewardDescriptions", None)
+
+    def winner(self) -> Optional(str, None):
+        """
+        Returns the willing Silly Team whose reward is currently active.
+        Will return None if the state is not set to "Reward"
+
+        Returns:
+            str: Willing silly team, as string
+            or
+            None: if the silly meter is not in the "Reward" state,
+            or if there is an error and this field doesn't show up
+        """
+
+        return self.data.get("winner", None)
+
+    def reward_points(self) -> Optional(List, None):
+        """Returns a list of length 3 with the points that each
+        Silly Team has acquired. Points are from 0 to 5,000,000.
+        This will return [None, None, None] if the state is not
+        set to "Reward"
+
+        Returns:
+            List: A list of 3 integers representing the points each
+            team has acquired, or a list of 3 None's if the state
+            is not "Reward"
+            or
+            None: if there is an error and this field doesn't show up
+        """
+
+        return self.data.get("rewardPoints", None)
+    
+    def next_update_time_stamp(self) -> Optional(int, None):
+        """
+        Returns the timestamp (in seconds) of when the Silly Meter
+        will updateitself next. Depends on the state:
+        -In the Active state, this indicates the next time that Silly
+        Points will be calculated and added in to the current HP
+        -In the Reward state, this indicates when the rewards end
+        -In the Inactive state, this indicates when the Silly Meter
+        will re-enter the Active State
+
+        Returns:
+            int: the timestamp (in seconds) of the next update
+            or
+            None: if there is an error and this field doesn't show up
+        """
+        return self.data.get("nextUpdateTimestamp", None)
+
+
+    
 
         
         
