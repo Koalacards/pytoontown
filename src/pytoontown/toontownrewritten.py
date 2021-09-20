@@ -13,7 +13,7 @@ API Wrapper for the Toontown Rewritten API, using three endpoints:
 -Silly Meter Status
 """
 def _get_data(url) -> Dict:
-    json_data = requests.get(url)
+    json_data = requests.get(url).json()
     data_dict = json.loads(json_data)
     return data_dict
 
@@ -212,7 +212,7 @@ class ToontownRewrittenSillyMeter:
         """
         Returns the Silly meter rewards as a list of three strings
         that the players are eligible to join. These are rerolled when
-        the player exits the "Reward" state
+        the silly meter exits the "Reward" state
 
         Returns:
             list: The list of the three rewards, as strings

@@ -12,7 +12,7 @@ API Wrapper for the Corporate Clash API, using two endpoints:
 """
 
 def _get_data(url) -> Dict:
-    json_data = requests.get(url)
+    json_data = requests.get(url).json()
     data_dict = json.loads(json_data)
     return data_dict
 
