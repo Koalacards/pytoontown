@@ -1,6 +1,5 @@
 from typing import Dict, List, Optional
 import requests
-import json
 
 DISTRICTS_ENDPOINT = "https://corporateclash.net/api/v1/districts.js"
 NEWS_ENDPOINT="https://corporateclash.net/api/v1/launcher/news"

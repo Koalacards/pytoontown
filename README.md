@@ -16,7 +16,7 @@ The Corporate Clash API features one class, `CorporateClashAPI`, which contains 
 
 ## Documentation
 
-Read the documentation [here](./DOCS.md)
+Read the documentation [here](https://github.com/Koalacards/pytoontown/blob/main/DOCS.md)
 
 ## Code Example
 

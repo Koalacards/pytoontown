@@ -1,6 +1,5 @@
 from typing import Dict, List, Optional, Union
 import requests
-import json
 
 INVASIONS_ENDPOINT="https://www.toontownrewritten.com/api/invasions"
 POPULATION_ENDPOINT="https://www.toontownrewritten.com/api/population"
