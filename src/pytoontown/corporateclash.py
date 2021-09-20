@@ -40,7 +40,7 @@ class CorporateClashAPI:
         """
         self.__init__()
     
-    def districts(self) -> Optional(List, None):
+    def districts(self) -> Optional[List]:
         """Returns a List of Dictionaries, where each Dictionary is a
         District Object
 
@@ -64,7 +64,7 @@ class CorporateClashAPI:
         """
         
 
-    def news(self) -> Optional(List, None):
+    def news(self) -> Optional[List]:
         """Returns a List of Dictionaries, Where each Dictionary is a news article
         News articles have the following keys:
         -id: ID of the article (int)

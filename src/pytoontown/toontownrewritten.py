@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 import requests
 import json
 
@@ -34,7 +34,7 @@ class ToontownRewrittenInvasion:
         """
         self.__init__()
 
-    def last_updated(self) -> Optional(int, None):
+    def last_updated(self) -> Optional[int]:
         """Returns the last updated time of the API call
 
         Returns:
@@ -44,7 +44,7 @@ class ToontownRewrittenInvasion:
         """
         return self.data.get("lastUpdated", None)
 
-    def error(self) -> Optional(str, None):
+    def error(self) -> Optional[str]:
         """Returns the error message as a string, or None if there is
         no error message
 
@@ -53,7 +53,7 @@ class ToontownRewrittenInvasion:
         """
         return self.data.get("error", None)
 
-    def invasions(self, as_array:bool=False) -> Optional(Dict, List, None):
+    def invasions(self, as_array:bool=False) -> Union[Dict, List, None]:
         """Returns the dictionary of ongoing invasions,
         where each Key is the district of the invasion (str), and 
         the corresponding value is a dictionary with 
@@ -107,7 +107,7 @@ class ToontownRewrittenPopulation:
         """
         self.__init__()
 
-    def last_updated(self) -> Optional(int, None):
+    def last_updated(self) -> Optional[int]:
         """Returns the last updated time of the API call
 
         Returns:
@@ -117,7 +117,7 @@ class ToontownRewrittenPopulation:
         """
         return self.data.get("lastUpdated", None)
 
-    def error(self) -> Optional(str, None):
+    def error(self) -> Optional[str]:
         """Returns the error message as a string, or None if there is
         no error message
 
@@ -126,7 +126,7 @@ class ToontownRewrittenPopulation:
         """
         return self.data.get("error", None)
     
-    def total_population(self) -> Optional(int, None):
+    def total_population(self) -> Optional[int]:
         """Returns the total population in the game
 
         Returns:
@@ -136,7 +136,7 @@ class ToontownRewrittenPopulation:
         """
         return self.data.get("totalPopulation", None)
     
-    def population_by_district(self) -> Optional(Dict, None):
+    def population_by_district(self) -> Optional[Dict]:
         """If there are no errors, returns a dictionary with 
         the names of the districts as keys and the population
         of the district as the corresponding value
@@ -165,7 +165,7 @@ class ToontownRewrittenSillyMeter:
         """
         self.__init__()
 
-    def as_of(self) -> Optional(int, None):
+    def as_of(self) -> Optional[int]:
         """Returns the generated time of the API call
 
         Returns:
@@ -175,7 +175,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("lastUpdated", None)
 
-    def error(self) -> Optional(str, None):
+    def error(self) -> Optional[str]:
         """Returns the error message as a string, or None if there is
         no error message
 
@@ -184,7 +184,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("error", None)
 
-    def state(self) -> Optional(str, None):
+    def state(self) -> Optional[str]:
         """
         Returns the Silly Meter State ("Active", "Reward", or "Inactive")
         if the data field exists.
@@ -196,7 +196,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("state", None)
     
-    def hp(self) -> Optional(int, None):
+    def hp(self) -> Optional[int]:
         """
         Returns the current HP of the silly meter, ranging from
         0-5,000,000.
@@ -208,7 +208,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("hp", None)
 
-    def rewards(self) -> Optional(List, None):
+    def rewards(self) -> Optional[List]:
         """
         Returns the Silly meter rewards as a list of three strings
         that the players are eligible to join. These are rerolled when
@@ -221,7 +221,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("rewards", None)
 
-    def reward_descriptions(self) -> Optional(List, None):
+    def reward_descriptions(self) -> Optional[List]:
         """
         Returns the Silly meter reward descriptions as a list of 
         three strings describing the current teams that the players 
@@ -235,7 +235,7 @@ class ToontownRewrittenSillyMeter:
         """
         return self.data.get("rewardDescriptions", None)
 
-    def winner(self) -> Optional(str, None):
+    def winner(self) -> Optional[str]:
         """
         Returns the willing Silly Team whose reward is currently active.
         Will return None if the state is not set to "Reward"
@@ -249,7 +249,7 @@ class ToontownRewrittenSillyMeter:
 
         return self.data.get("winner", None)
 
-    def reward_points(self) -> Optional(List, None):
+    def reward_points(self) -> Optional[List]:
         """Returns a list of length 3 with the points that each
         Silly Team has acquired. Points are from 0 to 5,000,000.
         This will return [None, None, None] if the state is not
@@ -265,7 +265,7 @@ class ToontownRewrittenSillyMeter:
 
         return self.data.get("rewardPoints", None)
     
-    def next_update_time_stamp(self) -> Optional(int, None):
+    def next_update_time_stamp(self) -> Optional[int]:
         """
         Returns the timestamp (in seconds) of when the Silly Meter
         will updateitself next. Depends on the state:
@@ -281,10 +281,3 @@ class ToontownRewrittenSillyMeter:
             None: if there is an error and this field doesn't show up
         """
         return self.data.get("nextUpdateTimestamp", None)
-
-
-    
-
-        
-        
-
