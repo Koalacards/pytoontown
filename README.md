@@ -63,7 +63,7 @@ Read the documentation [here](./DOCS.md)
         print(f"Silly meter winner: {sillymeter.winner()}")
 
         #how many points each silly team has
-        print(f"Silly meter reward points: {sillymeter.reward_points()}"})
+        print(f"Silly meter reward points: {sillymeter.reward_points()}")
 
         #Corporate clash district breakdown, represented by an array of district objects (dictionaries) (read documentation for more information)
         print(f"Corporate clash districts: {clash.districts()}")

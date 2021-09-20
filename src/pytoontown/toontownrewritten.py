@@ -13,8 +13,7 @@ API Wrapper for the Toontown Rewritten API, using three endpoints:
 -Silly Meter Status
 """
 def _get_data(url) -> Dict:
-    json_data = requests.get(url).json()
-    data_dict = json.loads(json_data)
+    data_dict = requests.get(url).json()
     return data_dict
 
 

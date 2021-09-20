@@ -12,9 +12,8 @@ API Wrapper for the Corporate Clash API, using two endpoints:
 """
 
 def _get_data(url) -> Dict:
-    json_data = requests.get(url).json()
-    data_dict = json.loads(json_data)
-    return data_dict
+    data = requests.get(url).json()
+    return data
 
 class CorporateClashAPI:
     """
@@ -22,13 +21,13 @@ class CorporateClashAPI:
     """
     def __init__(self) -> None:
         try:
-            self.districts = _get_data(DISTRICTS_ENDPOINT)
+            self.clash_districts = _get_data(DISTRICTS_ENDPOINT)
         except:
-            self.districts = None
+            self.clash_districts = None
         try:
-            self.news = _get_data(NEWS_ENDPOINT)
+            self.clash_news = _get_data(NEWS_ENDPOINT)
         except:
-            self.news = None
+            self.clash_news = None
         
 
     def refresh(self) -> None:
@@ -40,7 +39,7 @@ class CorporateClashAPI:
         """
         self.__init__()
     
-    def districts(self) -> Optional[List]:
+    def districts(self):
         """Returns a List of Dictionaries, where each Dictionary is a
         District Object
 
@@ -62,6 +61,7 @@ class CorporateClashAPI:
             or
             None: If there is some Error
         """
+        return self.clash_districts
         
 
     def news(self) -> Optional[List]:
@@ -80,5 +80,5 @@ class CorporateClashAPI:
             or
             None: If there is some error
         """
-        return self.news
+        return self.clash_news
 

@@ -139,6 +139,7 @@ The `CorporateClashAPI` class has the following methods:
     * cogs_attacking (str): Name of the cogs attacking if there is an invasion
     * count_defeated (int): Amount of cogs defeated in the district, refreshes to `0` when a new invasion starts
     * count_total (int): The total amount of cogs in an invasion, defaults to `0` if there is not an invasion happening
+    * remaining_time (int): The remaining time in the invasion, defaults to `0` if there is not an invasion
  * Returns `None` if there is some error with the Corporate Clash API
 
  *def* **news** *returns* Optional[List]:
